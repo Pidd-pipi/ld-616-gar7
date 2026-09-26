@@ -1,1 +1,6 @@
-import { seed } from "../seed"; export const overdueAlertRepository = { findAll: () => seed.overdueAlert, save: (row: unknown) => row };
+import { store } from "./store";
+
+export const overdueAlertRepository = {
+  findAll: () => store.overdueAlert,
+  save: (row: unknown) => row
+};

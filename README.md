@@ -56,7 +56,24 @@ backend/src/routes, controllers, services, models, repositories, middlewares, co
 
 - DeviceCalibrationStatus: constants/DeviceCalibrationStatus、types/DeviceCalibrationStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - PlanStatus: constants/PlanStatus、types/PlanStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
+  - 子分组 `UNSTARTED_PLAN_STATUSES`（PLANNED/ASSIGNED）与 `STARTED_PLAN_STATUSES`（IN_PROGRESS/CERT_UPLOADED/CLOSED）定义在 constants/PlanStatus，服务层 `CalibrationPlanService.isUnstarted`、机构暂停处置清单 `CalibrationVendorService.listUnstartedPlans` 均引用：未开始计划才可改派/退回，已开始计划继续走原流程。
 - CertificateResult: constants/CertificateResult、types/CertificateResult、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
+- VendorStatus: constants/VendorStatus（ACTIVE 资质有效 / SUSPENDED 资质暂停），被 CalibrationVendor 模型、seed、CalibrationVendorService（suspend/triage 校验）、CalibrationPlanService（改派目标资质校验）、utils/formatters 引用。
+- PlanChangeType: constants/PlanChangeType（REASSIGN 改派 / RELEASE_BLOCKED 退回未派发），被 PlanChangeRecord 模型、types/PlanChangeRecordPayload、constructors/PlanChangeRecordDtoFactory、repositories/PlanChangeRecordRepository、services/PlanChangeRecordService、utils/formatters、设备详情接口引用。
+
+## 机构资质暂停后的处置流程
+
+资质被暂停的机构不会自动取消未来计划（避免设备送到现场才被拒收），由调度员逐笔处置：
+
+1. `POST /api/calibration-vendor/{id}/suspend` 暂停机构资质（DISPATCHER/ADMIN）。
+2. `GET /api/calibration-vendor/{id}/triage-plans` 列出该机构名下所有**未开始**计划（PLANNED/ASSIGNED），每条附带设备详情与当前「资质有效且服务范围匹配」的可承接机构候选；IN_PROGRESS 及以后状态不在清单内，继续走原流程。
+3. 调度员逐笔处理：
+   - 有人接：`POST /api/calibration-plan/{id}/reassign`，body `{ target_vendor_id, reason, expected_version }`。设备（device_id）与日期（planned_date）不变；原机构 original_vendor_id、处理人 handled_by、原因 handled_reason 留在计划上，状态置为 ASSIGNED。
+   - 没人接：`POST /api/calibration-plan/{id}/release-blocked`，body `{ blocked_reason, expected_version }`。计划回到未派发（PLANNED，assigned_vendor_id 清空）并写明阻塞原因。
+4. 两个调度员同时处理同一计划时，按 `version` 乐观锁控制：第二笔用旧 `expected_version` 提交返回 409 `PLAN_VERSION_CONFLICT`，落地只发生一次。
+5. 每次处置写入 plan_change_record 流水，可通过 `GET /api/measuring-device/{id}/detail`（设备详情）或 `GET /api/plan-change-record/plan/{planId}` 查询，含原/新机构名称、原因、处理人与版本前后值。
+
+当前用户通过请求头传递：`x-role`（DISPATCHER/ADMIN 可写）、`x-user-id`、`x-user-name`。
 
 ## 为什么会牵一发动全身
 

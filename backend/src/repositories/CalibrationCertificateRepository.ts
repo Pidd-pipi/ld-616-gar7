@@ -1,1 +1,6 @@
-import { seed } from "../seed"; export const calibrationCertificateRepository = { findAll: () => seed.calibrationCertificate, save: (row: unknown) => row };
+import { store } from "./store";
+
+export const calibrationCertificateRepository = {
+  findAll: () => store.calibrationCertificate,
+  save: (row: unknown) => row
+};
