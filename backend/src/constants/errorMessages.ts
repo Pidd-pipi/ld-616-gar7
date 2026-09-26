@@ -1,1 +1,21 @@
-export const ERROR_MESSAGES = { AUTH_REQUIRED: "missing bearer token", RBAC_DENIED: "role denied", VALIDATION_FAILED: "invalid payload", RATE_LIMITED: "too many requests" };
+export const ERROR_MESSAGES = {
+  AUTH_REQUIRED: "missing bearer token",
+  RBAC_DENIED: "role denied",
+  VALIDATION_FAILED: "invalid payload",
+  RATE_LIMITED: "too many requests",
+  PLAN_NOT_FOUND: "calibration plan not found",
+  VENDOR_NOT_FOUND: "calibration vendor not found",
+  DEVICE_NOT_FOUND: "measuring device not found",
+  PLAN_NOT_STARTED_REQUIRED: "plan has already started and must keep its original flow",
+  PLAN_ASSIGNED_VENDOR_REQUIRED: "plan is not assigned to any vendor",
+  VENDOR_NOT_SUSPENDED: "vendor qualification is not suspended",
+  VENDOR_ALREADY_SUSPENDED: "vendor qualification is already suspended",
+  TARGET_VENDOR_INACTIVE: "target vendor qualification is not active",
+  SERVICE_SCOPE_MISMATCH: "target vendor service scope does not cover the device type",
+  ELIGIBLE_VENDOR_EXISTS: "an eligible active vendor exists, please reassign the plan instead of blocking it",
+  NO_ELIGIBLE_VENDOR: "no active vendor with matching service scope can take this plan",
+  PLAN_VERSION_CONFLICT: "plan was modified by another dispatcher, retry with the latest version",
+  PLAN_ALREADY_HANDLED: "plan suspension handling already landed once",
+  REASON_REQUIRED: "reason is required",
+  HANDLER_REQUIRED: "handled_by is required"
+} as const;

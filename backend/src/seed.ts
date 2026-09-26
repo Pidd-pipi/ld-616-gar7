@@ -2,155 +2,254 @@ export const seed = {
   "measuringDevice": [
     {
       "id": 1,
-      "device_code": "device code 1",
-      "name": "name 1",
-      "device_type": "DUE_SOON",
-      "accuracy_level": "LOW",
-      "owner_dept": "owner dept 1",
-      "calibration_cycle_days": "calibration cycle days 1",
+      "device_code": "DEV-TEMP-001",
+      "name": "恒温箱温度记录仪",
+      "device_type": "THERMAL",
+      "accuracy_level": "HIGH",
+      "owner_dept": "理化实验室",
+      "calibration_cycle_days": 365,
       "status": "DUE_SOON"
     },
     {
       "id": 2,
-      "device_code": "device code 2",
-      "name": "name 2",
-      "device_type": "OVERDUE",
+      "device_code": "DEV-PRES-002",
+      "name": "精密数字压力表",
+      "device_type": "PRESSURE",
       "accuracy_level": "MEDIUM",
-      "owner_dept": "owner dept 2",
-      "calibration_cycle_days": "calibration cycle days 2",
-      "status": "OVERDUE"
+      "owner_dept": "机加车间",
+      "calibration_cycle_days": 180,
+      "status": "VALID"
     },
     {
       "id": 3,
-      "device_code": "device code 3",
-      "name": "name 3",
-      "device_type": "CALIBRATING",
+      "device_code": "DEV-DIM-003",
+      "name": "三坐标测量机",
+      "device_type": "DIMENSION",
       "accuracy_level": "HIGH",
-      "owner_dept": "owner dept 3",
-      "calibration_cycle_days": "calibration cycle days 3",
-      "status": "VALID"
+      "owner_dept": "质检中心",
+      "calibration_cycle_days": 365,
+      "status": "OVERDUE"
+    },
+    {
+      "id": 4,
+      "device_code": "DEV-ELEC-004",
+      "name": "数字万用表",
+      "device_type": "ELECTRICAL",
+      "accuracy_level": "LOW",
+      "owner_dept": "电气车间",
+      "calibration_cycle_days": 365,
+      "status": "CALIBRATING"
+    },
+    {
+      "id": 5,
+      "device_code": "DEV-GAS-005",
+      "name": "可燃气体检测仪",
+      "device_type": "GAS",
+      "accuracy_level": "MEDIUM",
+      "owner_dept": "安环部",
+      "calibration_cycle_days": 180,
+      "status": "DUE_SOON"
     }
   ],
   "calibrationPlan": [
     {
       "id": 1,
       "device_id": 1,
-      "planned_date": "2026-06-11T09:00:00Z",
-      "plan_type": "DUE_SOON",
-      "priority": "priority 1",
-      "status": "DUE_SOON",
-      "assigned_vendor_id": 1,
-      "created_by": "created by 1"
+      "planned_date": "2026-10-15T02:00:00Z",
+      "plan_type": "PERIODIC",
+      "priority": "HIGH",
+      "status": "ASSIGNED",
+      "assigned_vendor_id": 6,
+      "original_vendor_id": null,
+      "last_suspension_handling": null,
+      "suspension_handled_by": null,
+      "suspension_reason": null,
+      "block_reason": null,
+      "version": 1,
+      "created_by": "planner.li"
     },
     {
       "id": 2,
       "device_id": 2,
-      "planned_date": "2026-06-12T09:00:00Z",
-      "plan_type": "OVERDUE",
-      "priority": "priority 2",
-      "status": "OVERDUE",
-      "assigned_vendor_id": 2,
-      "created_by": "created by 2"
+      "planned_date": "2026-10-18T02:00:00Z",
+      "plan_type": "PERIODIC",
+      "priority": "MEDIUM",
+      "status": "ASSIGNED",
+      "assigned_vendor_id": 6,
+      "original_vendor_id": null,
+      "last_suspension_handling": null,
+      "suspension_handled_by": null,
+      "suspension_reason": null,
+      "block_reason": null,
+      "version": 1,
+      "created_by": "planner.li"
     },
     {
       "id": 3,
       "device_id": 3,
-      "planned_date": "2026-06-13T09:00:00Z",
-      "plan_type": "CALIBRATING",
-      "priority": "priority 3",
-      "status": "VALID",
-      "assigned_vendor_id": 3,
-      "created_by": "created by 3"
+      "planned_date": "2026-10-20T02:00:00Z",
+      "plan_type": "OVERDUE",
+      "priority": "HIGH",
+      "status": "ASSIGNED",
+      "assigned_vendor_id": 6,
+      "original_vendor_id": null,
+      "last_suspension_handling": null,
+      "suspension_handled_by": null,
+      "suspension_reason": null,
+      "block_reason": null,
+      "version": 1,
+      "created_by": "planner.wang"
+    },
+    {
+      "id": 4,
+      "device_id": 4,
+      "planned_date": "2026-09-24T02:00:00Z",
+      "plan_type": "PERIODIC",
+      "priority": "MEDIUM",
+      "status": "IN_PROGRESS",
+      "assigned_vendor_id": 6,
+      "original_vendor_id": null,
+      "last_suspension_handling": null,
+      "suspension_handled_by": null,
+      "suspension_reason": null,
+      "block_reason": null,
+      "version": 1,
+      "created_by": "planner.wang"
+    },
+    {
+      "id": 5,
+      "device_id": 5,
+      "planned_date": "2026-11-02T02:00:00Z",
+      "plan_type": "PERIODIC",
+      "priority": "LOW",
+      "status": "ASSIGNED",
+      "assigned_vendor_id": 6,
+      "original_vendor_id": null,
+      "last_suspension_handling": null,
+      "suspension_handled_by": null,
+      "suspension_reason": null,
+      "block_reason": null,
+      "version": 1,
+      "created_by": "planner.li"
+    },
+    {
+      "id": 6,
+      "device_id": 1,
+      "planned_date": "2025-10-15T02:00:00Z",
+      "plan_type": "PERIODIC",
+      "priority": "MEDIUM",
+      "status": "CLOSED",
+      "assigned_vendor_id": 1,
+      "original_vendor_id": null,
+      "last_suspension_handling": null,
+      "suspension_handled_by": null,
+      "suspension_reason": null,
+      "block_reason": null,
+      "version": 1,
+      "created_by": "planner.li"
     }
   ],
   "calibrationCertificate": [
     {
       "id": 1,
       "device_id": 1,
-      "plan_id": 1,
-      "certificate_no": "certificate no 1",
-      "result_status": "DUE_SOON",
-      "valid_until": "valid until 1",
-      "file_path": "file path 1",
-      "issued_by": "issued by 1"
+      "plan_id": 6,
+      "certificate_no": "CERT-2025-10-0001",
+      "result_status": "PASS",
+      "valid_until": "2026-10-15",
+      "file_path": "/certificates/CERT-2025-10-0001.pdf",
+      "issued_by": "华测计量院"
     },
     {
       "id": 2,
       "device_id": 2,
       "plan_id": 2,
-      "certificate_no": "certificate no 2",
-      "result_status": "OVERDUE",
-      "valid_until": "valid until 2",
-      "file_path": "file path 2",
-      "issued_by": "issued by 2"
-    },
-    {
-      "id": 3,
-      "device_id": 3,
-      "plan_id": 3,
-      "certificate_no": "certificate no 3",
-      "result_status": "VALID",
-      "valid_until": "valid until 3",
-      "file_path": "file path 3",
-      "issued_by": "issued by 3"
+      "certificate_no": "",
+      "result_status": "PASS",
+      "valid_until": "2027-04-18",
+      "file_path": "",
+      "issued_by": ""
     }
   ],
   "calibrationVendor": [
     {
       "id": 1,
-      "vendor_name": "vendor name 1",
-      "qualification_no": "qualification no 1",
-      "contact_phone": "13800000001",
-      "service_scope": "service scope 1",
-      "vendor_status": "DUE_SOON"
+      "vendor_name": "华测计量科学研究院",
+      "qualification_no": "CNAS-L0001",
+      "contact_phone": "010-88000001",
+      "service_scope": "THERMAL,PRESSURE,DIMENSION",
+      "vendor_status": "ACTIVE",
+      "suspend_reason": null,
+      "suspended_at": null,
+      "suspended_by": null
     },
     {
       "id": 2,
-      "vendor_name": "vendor name 2",
-      "qualification_no": "qualification no 2",
-      "contact_phone": "13800000002",
-      "service_scope": "service scope 2",
-      "vendor_status": "OVERDUE"
+      "vendor_name": "中检计量技术有限公司",
+      "qualification_no": "CNAS-L0002",
+      "contact_phone": "021-88000002",
+      "service_scope": "THERMAL,ELECTRICAL",
+      "vendor_status": "ACTIVE",
+      "suspend_reason": null,
+      "suspended_at": null,
+      "suspended_by": null
     },
     {
       "id": 3,
-      "vendor_name": "vendor name 3",
-      "qualification_no": "qualification no 3",
-      "contact_phone": "13800000003",
-      "service_scope": "service scope 3",
-      "vendor_status": "VALID"
+      "vendor_name": "华南精密校准中心",
+      "qualification_no": "CNAS-L0003",
+      "contact_phone": "020-88000003",
+      "service_scope": "DIMENSION,PRESSURE",
+      "vendor_status": "ACTIVE",
+      "suspend_reason": null,
+      "suspended_at": null,
+      "suspended_by": null
+    },
+    {
+      "id": 4,
+      "vendor_name": "安规电气检测所",
+      "qualification_no": "CNAS-L0004",
+      "contact_phone": "0755-88000004",
+      "service_scope": "ELECTRICAL,GAS",
+      "vendor_status": "REVOKED",
+      "suspend_reason": "资质撤销（历史数据）",
+      "suspended_at": null,
+      "suspended_by": null
+    },
+    {
+      "id": 5,
+      "vendor_name": "西部综合计量站",
+      "qualification_no": "CNAS-L0005",
+      "contact_phone": "028-88000005",
+      "service_scope": "PRESSURE",
+      "vendor_status": "ACTIVE",
+      "suspend_reason": null,
+      "suspended_at": null,
+      "suspended_by": null
+    },
+    {
+      "id": 6,
+      "vendor_name": "东方全项校准服务公司",
+      "qualification_no": "CNAS-L0006",
+      "contact_phone": "0571-88000006",
+      "service_scope": "THERMAL,PRESSURE,DIMENSION,ELECTRICAL,GAS",
+      "vendor_status": "SUSPENDED",
+      "suspend_reason": "CNAS 飞行检查不符合项，暂停全部校准资质 3 个月",
+      "suspended_at": "2026-09-25T03:30:00Z",
+      "suspended_by": "quality.chen"
     }
   ],
   "overdueAlert": [
     {
       "id": 1,
-      "device_id": 1,
-      "plan_id": 1,
-      "alert_level": "LOW",
-      "alert_reason": "alert reason 1",
-      "handled_by": "handled by 1",
-      "handled_at": "2026-06-11T09:00:00Z",
-      "status": "DUE_SOON"
-    },
-    {
-      "id": 2,
-      "device_id": 2,
-      "plan_id": 2,
-      "alert_level": "MEDIUM",
-      "alert_reason": "alert reason 2",
-      "handled_by": "handled by 2",
-      "handled_at": "2026-06-12T09:00:00Z",
-      "status": "OVERDUE"
-    },
-    {
-      "id": 3,
       "device_id": 3,
       "plan_id": 3,
       "alert_level": "HIGH",
-      "alert_reason": "alert reason 3",
-      "handled_by": "handled by 3",
-      "handled_at": "2026-06-13T09:00:00Z",
-      "status": "VALID"
+      "alert_reason": "校准计划已超期，证书失效",
+      "handled_by": "",
+      "handled_at": "",
+      "status": "OPEN"
     }
-  ]
+  ],
+  "planChangeRecord": []
 } as const;
